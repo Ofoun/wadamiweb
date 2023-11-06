@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+		xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/style.css}" />			
+</head>	
+
+<body>
+<div th:fragment="header_menu" class= "nav-header_menu">
+	<nav class="navbar navbar-expand-lg navbar-light">
+		<a class="navbar-brand" th:href="@{/}">
+			<!--src="https://manguevie.s3.eu-central-1.amazonaws.com/site-logo/Wadami.png"-->
+			<img 
+				th:src="@{images/Wadami.png}"
+				class="img-fluid-header" 
+				alt="WadamiIcon" 
+				style="/* border:  1px solid #646464; */
+			    border-radius: 4px;
+				padding: 3px;
+				width: 220px;
+				height: 70px;"			
+			/>,Stp
+		</a>
+		
+	</nav>
+</div>
+
+<div th:fragment="search_nav" class="row">
+	<div class="col-md">
+		
+		<th:block sec:authorize="isAuthenticated()">	
+			<form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+				<input type="submit" value="Logout" />
+			</form>
+		</th:block>
+		
+		<nav class="navbar navbar-expand-sm bg-light">
+			<div class="collapse navbar-collapse" id="searchNavbar">
+				<form class="form-inline" th:action="@{/search}" method="get">
+					<input type="search" name="keyword" class="form-control mr-sm-2 mb-2"
+						th:value="${keyword}" 
+						placeholder="mot-clé" required />
+					<input type="submit" value="Chercher" class="btn btn-outline-success mb-2" />
+				
+				</form>
+								
+					<th:block class= "annonceArticleFirstPage1" sec:authorize="!isAuthenticated()">
+						<div class= "annonceArticleFirstPage1 mb-2 ml-2">
+				       		<a class="nav-link" th:href="@{/register}">Cliquez ici pour faire une annonce</a>
+						</div>
+					</th:block>
+					
+				<ul class="navbar-nav">						
+					<th:block sec:authorize="isAuthenticated()">
+					<li class="nav-item">
+						<b><a class="nav-link" th:href="@{/account_details}" 
+								sec:authentication="principal.fullName"></a></b>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{https://admin.manguevie.com/products/new}"
+							target="_blank">Faire une annonce
+						</a>
+<!-- 						<a class="nav-link" th:href="@{http://localhost:8080/products/new}"
+							target="_blank">Faire une annonce
+						</a>
+ -->					</li>
+										
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/address_book}">Carnet d'adresses</a>
+					</li>
+																									
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/orders}">Mes commandes</a>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link fas fa-shopping-cart fa-2x" 
+							title="Votre panier d'achat" th:href="@{/cart}"></a>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link" href="javascript: document.logoutForm.submit()"><i style="color: maroon;">Déconnexion</i></a>
+					</li>					
+					</th:block>						
+				</ul>				
+			</div>
+		</nav>
+	</div>
+</div>
+	
+<div th:fragment="full-row" id="full-row">
+	<div class="row">
+			<div class="col-3"><h4>Recherche par catégorie </h4></div>
+	
+			<div class="col-9 slider_content_top">
+<!-- 				<span class="message_top" data-text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Faites vos annonces gratuitement! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Faites vos annonces gratuitement!  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Faites vos annonces gratuitement! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Faites vos annonces gratuitement!  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ">
+					Faites vos annonces gratuitement!
+				</span> -->
+				
+			<span class="message_top" data-text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Vous avez quelque chose à vendre ?   &nbsp;&nbsp;Vous recherchez quelque chose ?   &nbsp;&nbsp;Cliquez sur la catégorie à laquelle le produit appartient ou adressez-vous à nous par message ou au 60 40 63 63. Nous allons vous aider ! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Vous avez quelque chose à vendre ?   &nbsp;&nbsp;Vous recherchez quelque chose ?   &nbsp;&nbsp;Cliquez sur la catégorie à laquelle le produit appartient ou adressez-vous à nous par message ou au 60 40 63 63. Nous allons vous aider !  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Vous avez quelque chose à vendre ?   &nbsp;&nbsp;Vous recherchez quelque chose ?   &nbsp;&nbsp;Cliquez sur la catégorie à laquelle le produit appartient ou adressez-vous à nous par message ou au 60 40 63 63. Nous allons vous aider ! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Vous avez quelque chose à vendre ?   &nbsp;&nbsp;Vous recherchez quelque chose ?   &nbsp;&nbsp;Cliquez sur la catégorie à laquelle le produit appartient ou adressez-vous à nous par message ou au 60 40 63 63. Nous allons vous aider !  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ">
+				<!-- Vous avez quelque chose à vendre ?   &nbsp;&nbsp;Vous recherchez quelque chose ?   &nbsp;&nbsp;Cliquez sur la catégorie à laquelle le produit appartient ou adressez-vous à nous par message ou au 60 40 63 63. Nous allons vous aider ! -->
+			</span>
+			</div>	
+	</div>
+</div>
+
+<div th:fragment="less-row" id="less-row">	
+	<div class="row">
+		<div class="m-auto"><h3>Recherche par catégorie </h3></div>
+
+		<div class="slider_content_top">
+<!-- 				<span class="message_top" data-text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Faites vos annonces gratuitement! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Faites vos annonces gratuitement!  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Faites vos annonces gratuitement! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Faites vos annonces gratuitement!  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ">
+					Faites vos annonces gratuitement!
+				</span> -->
+				
+			<span class="message_top" data-text="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Vous avez quelque chose à vendre ?   &nbsp;&nbsp;Vous recherchez quelque chose ?   &nbsp;&nbsp;Cliquez sur la catégorie à laquelle le produit appartient ou adressez-vous à nous par message ou au 60 40 63 63. Nous allons vous aider ! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Vous avez quelque chose à vendre ?   &nbsp;&nbsp;Vous recherchez quelque chose ?   &nbsp;&nbsp;Cliquez sur la catégorie à laquelle le produit appartient ou adressez-vous à nous par message ou au 60 40 63 63. Nous allons vous aider !  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Vous avez quelque chose à vendre ?   &nbsp;&nbsp;Vous recherchez quelque chose ?   &nbsp;&nbsp;Cliquez sur la catégorie à laquelle le produit appartient ou adressez-vous à nous par message ou au 60 40 63 63. Nous allons vous aider ! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; Vous avez quelque chose à vendre ?   &nbsp;&nbsp;Vous recherchez quelque chose ?   &nbsp;&nbsp;Cliquez sur la catégorie à laquelle le produit appartient ou adressez-vous à nous par message ou au 60 40 63 63. Nous allons vous aider !  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ">
+				<!-- Vous avez quelque chose à vendre ?   &nbsp;&nbsp;Vous recherchez quelque chose ?   &nbsp;&nbsp;Cliquez sur la catégorie à laquelle le produit appartient ou adressez-vous à nous par message ou au 60 40 63 63. Nous allons vous aider ! -->
+			</span>
+		</div>
+	</div>
+</div>
+
+<div th:fragment="annonceArticleFirstPage2" id="annonceArticleFirstPage2">	
+	<th:block sec:authorize="!isAuthenticated()">
+		<div class= "annonceArticleFirstPage2 text-center">
+       		<a class="nav-link" th:href="@{/register}">Cliquez ici pour faire une annonce</a>
+		</div>
+	</th:block>
+</div>
+
+
+
+
+<div th:fragment="footer_menu" style="margin-top:150px" class="nav-footer">
+
+	<div class="slider_content" style="color:green">
+	
+		<div th:fragment="footer" class="footer text-center p-1">
+			<!-- <p>[[${COPYRIGHT}]]</p> -->
+			<!-- <p class="awesome">Faites vos annonces gratuitement!</p> -->
+			<p>
+				<b class="awesome" >WaDaMi,</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small><small>Stp</small></small>
+			</p>
+		</div>
+	</div>	
+</div>
+
+
+
+</body>
+</html>
