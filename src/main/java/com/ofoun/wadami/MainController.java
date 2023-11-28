@@ -10,7 +10,7 @@ public class MainController {
 	public String viewHomePage() {
 		
 		
-		return "index.html";
+		return "/index";
 		
 	}
 
