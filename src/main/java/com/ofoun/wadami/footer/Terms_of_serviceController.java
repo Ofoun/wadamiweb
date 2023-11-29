@@ -9,7 +9,7 @@ public class Terms_of_serviceController {
 	@GetMapping("/terms-of-service")
 	public String showTermsOfService() {
 		
-		return "/terms-of-service";		
+		return "terms-of-service";		
 	}
 
 }
